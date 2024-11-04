@@ -21,60 +21,42 @@ namespace
     HelloPass() : FunctionPass(ID) {}
 
     bool runOnFunction(Function &F) override
+{
+    errs() << "HelloPass runOnFunction: ";
+    errs() << F.getName() << "\n";
+
+    int blockNumber = 1;
+    for (auto &basic_block : F)
     {
-      errs() << "HelloPass runOnFunction: ";
-      errs() << F.getName() << "\n";
+        errs() << "Basic Block " << blockNumber << ":\n";
 
-      for (auto &basic_block : F)
-      {
-        for (auto &inst : basic_block)
+        // Print the number of predecessors
+        int pred_count = 0;
+        for (auto *pred : predecessors(&basic_block))
         {
-          errs() << inst << "\n";
-          if (inst.getOpcode() == Instruction::Load)
-          {
-            errs() << "This is Load"
-                   << "\n";
-          }
-          if (inst.getOpcode() == Instruction::Store)
-          {
-            errs() << "This is Store"
-                   << "\n";
-          }
-          if (inst.isBinaryOp())
-          {
-            errs() << "Op Code:" << inst.getOpcodeName() << "\n"; 
-            if (inst.getOpcode() == Instruction::Add)
-            {
-              errs() << "This is Addition"
-                     << "\n";
-            }
-            if (inst.getOpcode() == Instruction::Sub)
-            {
-              errs() << "This is Subtraction"
-                     << "\n";
-            }
-            if (inst.getOpcode() == Instruction::Mul)
-            {
-              errs() << "This is Multiplication"
-                     << "\n";
-            }
-            if (inst.getOpcode() == Instruction::SDiv)
-            {
-              errs() << "This is Division"
-                     << "\n";
-            }
+            ++pred_count;
+        }
+        errs() << "  Number of Predecessors: " << pred_count << "\n";
 
-            // See Other classes, Instruction::Sub, Instruction::UDiv, Instruction::SDiv
-            auto *ptr = dyn_cast<User>(&inst);
-            for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it)
-            {
-              errs() << "\t" << *(*it) << "\n";
-            }
-          }
+        // Print the number of successors
+        int succ_count = 0;
+        for (auto *succ : successors(&basic_block))
+        {
+            ++succ_count;
+        }
+        errs() << "  Number of Successors: " << succ_count << "\n";
+
+        ++blockNumber;
+    }
+    return false;
+}
+
+    void print(raw_ostream &O, const Module *M) const override {
+        O << "Processed functions:\n";
+        for (const auto &F : *M) {
+            O << "  Function: " << F.getName() << "\n";
         }
       }
-      return false;
-    }
   }; // end of Hello pass
 } // end of anonymous namespace
 
