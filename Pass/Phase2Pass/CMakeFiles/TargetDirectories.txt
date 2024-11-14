@@ -1,0 +1,11 @@
+/root/CS201/CS201-Project/Pass/Phase2Pass/CMakeFiles/edit_cache.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/CMakeFiles/rebuild_cache.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/HelloPass/CMakeFiles/intrinsics_gen.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/HelloPass/CMakeFiles/omp_gen.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/HelloPass/CMakeFiles/acc_gen.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/HelloPass/CMakeFiles/HelloPass.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/HelloPass/CMakeFiles/edit_cache.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/HelloPass/CMakeFiles/rebuild_cache.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/Phase2Pass/CMakeFiles/ParseIRPass.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/Phase2Pass/CMakeFiles/edit_cache.dir
+/root/CS201/CS201-Project/Pass/Phase2Pass/Phase2Pass/CMakeFiles/rebuild_cache.dir

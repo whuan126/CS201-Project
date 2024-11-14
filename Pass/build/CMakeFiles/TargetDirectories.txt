@@ -1,0 +1,6 @@
+/root/CS201/CS201-Project/Pass/build/CMakeFiles/intrinsics_gen.dir
+/root/CS201/CS201-Project/Pass/build/CMakeFiles/omp_gen.dir
+/root/CS201/CS201-Project/Pass/build/CMakeFiles/acc_gen.dir
+/root/CS201/CS201-Project/Pass/build/CMakeFiles/HelloPass.dir
+/root/CS201/CS201-Project/Pass/build/CMakeFiles/edit_cache.dir
+/root/CS201/CS201-Project/Pass/build/CMakeFiles/rebuild_cache.dir
