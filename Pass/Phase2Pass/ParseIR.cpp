@@ -8,47 +8,46 @@
 using namespace llvm;
 
 namespace {
-  struct ParseIRPass : public ModulePass {
+class ParseIRPass : public ModulePass {
+public:
     static char ID;
     ParseIRPass() : ModulePass(ID) {}
 
     bool runOnModule(Module &M) override {
-      errs() << "Parsing LLVM IR for Module: " << M.getName() << "\n";
+        int index = 1;
 
-      // Iterate through each function
-      for (Function &F : M) {
-        if (F.isDeclaration()) {
-          // Skip function declarations
-          continue;
-        }
+        errs() << "Parsing and Indexing LLVM IR...\n";
+
+        // Iterate through all functions in the module
+        for (Function &F : M) {
+        if (F.isDeclaration())
+            continue;
 
         errs() << "Function: " << F.getName() << "\n";
 
-        // Iterate through basic blocks in the function
+        // Iterate through each basic block in the function
         for (BasicBlock &BB : F) {
-          errs() << "  Basic Block:\n";
-
-          // Iterate through instructions in the basic block
-          for (Instruction &I : BB) {
-            errs() << "    " << I.getOpcodeName(); // Print opcode name (add, mul, store, load, etc...)
-            
-            if (auto *binaryOp = dyn_cast<BinaryOperator>(&I)) {
-              errs() << " (Binary Operator: ";
-              binaryOp->getOperand(0)->print(errs());
-              errs() << ", ";
-              binaryOp->getOperand(1)->print(errs());
-              errs() << ")";
+            if (!BB.hasName()) {
+            BB.setName("block_" + std::to_string(index));
             }
-            errs() << "\n";
-          }
+
+            errs() << "Block: " << BB.getName() << "\n";
+
+            // Iterate through instructions in the basic block
+            for (Instruction &I : BB) {
+            // Print the index and the instruction
+            errs() << index++ << ": " << I << "\n";
+            }
         }
-      }
-      return false;
+        }
+        return false;
     }
-  };
-}
+
+    void print(raw_ostream &O, const Module *M) const override {
+    }
+
+};
+} 
 
 char ParseIRPass::ID = 0;
-static RegisterPass<ParseIRPass> X("parseIR", "Parse and Index LLVM IR",
-                                   false /* Only looks at CFG */,
-                                   false /* Analysis Pass */);
+static RegisterPass<ParseIRPass> X("parseIR", "Parse and Index LLVM IR", false, false);
